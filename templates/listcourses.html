@@ -9,11 +9,16 @@
       </form>
       
       <div>
-        <ul>
+        <table>
+            <tr>
+                <th>Courses</th>
+            </tr>
             {% for item in data %}
-            <li>{{item}}</li>
+            <tr>
+                <td>{{item}}</td>
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
       </div>
    </body>
 </html>
