@@ -140,7 +140,7 @@ def countrybarchart():
 
 @app.route('/kmeansdemo')
 def kmeansdemo():
-    df = pd.read_csv('csv/Students.csv',sep=';')
+    df = pd.read_csv('/home/centos/environments/app/csv/Students.csv',sep=';')
     #Make a copy of DF
     df_tr = df
 
