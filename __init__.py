@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, json, url_for
+from flask import Flask, render_template, request, json, url_for, redirect
 from flaskext.mysql import MySQL
 import plotly
 #plotly.tools.set_credentials_file(username='ganeshcodes', api_key='9QIJefjnbz6Y0arQD7ww')
@@ -158,7 +158,7 @@ def kmeansdemo():
 
     pca_c = pca.transform(X)
     
-    kmeans=KMeans(n_clusters=2)
+    kmeans=KMeans(n_clusters=4)
 
     kmeansoutput=kmeans.fit(Y)
 
