@@ -11,10 +11,12 @@ import plotly.graph_objs as go
 import pandas as pd
 from scipy import stats
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pylab as pl
 
 app = Flask(__name__, static_url_path='')
 
@@ -141,16 +143,48 @@ def countrybarchart():
 @app.route('/kmeansdemo')
 def kmeansdemo():
     df = pd.read_csv('static/Students.csv',sep=';')
+
+
+    Y = df_tr_std[['Kilograms']]
+
+    X = df[['Centimeters']]
+
     print("read csv")
     print(df)
-    #Make a copy of DF
+    
+    pca = PCA(n_components=1).fit(Y)
+
+    pca_d = pca.transform(Y)
+
+    pca_c = pca.transform(X)
+    
+    kmeans=KMeans(n_clusters=3)
+
+    kmeansoutput=kmeans.fit(Y)
+
+    kmeansoutput
+
+    pl.figure('3 Cluster K-Means')
+
+    pl.scatter(pca_c[:, 0], pca_d[:, 0], c=kmeansoutput.labels_)
+
+    pl.xlabel('Dividend Yield')
+
+    pl.ylabel('Returns')
+
+    pl.title('3 Cluster K-Means')
+
+    pl.savefig('static/kmeans.png')
+
+
+    '''#Make a copy of DF
     df_tr = df
     #Standardize
-    clmns = ["GivenName","Surname","StreetAddress","City","State","StateFull","ZipCode","EmailAddress","Username","Password","TelephoneNumber","MothersMaiden","Birthday","Age","CCNumber","CVV2","NationalID","BloodType","Kilograms","Centimeters","Latitude","Longitude"]
-    df_tr_std = stats.zscore(df_tr[clmns])
+    #clmns = ["GivenName","Surname","StreetAddress","City","State","StateFull","ZipCode","EmailAddress","Username","Password","TelephoneNumber","MothersMaiden","Birthday","Age","CCNumber","CVV2","NationalID","BloodType","Kilograms","Centimeters","Latitude","Longitude"]
+    #df_tr_std = stats.zscore(df_tr[clmns])
 
     #Cluster the data
-    kmeans = KMeans(n_clusters=2, random_state=0).fit(df_tr_std)
+    kmeans = KMeans(n_clusters=2, random_state=0).fit(Y)
     labels = kmeans.labels_
 
     #Glue back to originaal data
@@ -168,11 +202,8 @@ def kmeansdemo():
            hue="clusters",  
            scatter_kws={"marker": "D", 
                         "s": 100})
-    '''plt.title('Clusters Wattage vs Duration')
-    plt.xlabel('Wattage')
-    plt.ylabel('Duration')'''
-
-    snsplot.savefig("static/output.png")
+    
+    snsplot.savefig("static/output.png")'''
     return "kmeans plot generated!"
 
 
