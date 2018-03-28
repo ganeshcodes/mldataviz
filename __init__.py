@@ -145,7 +145,7 @@ def kmeansdemo():
     df = pd.read_csv('static/Students.csv',sep=';')
 
 
-    Y = df_tr_std[['Kilograms']]
+    Y = df[['Kilograms']]
 
     X = df[['Centimeters']]
 
