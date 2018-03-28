@@ -71,6 +71,8 @@ def countrylinechart():
         totalpop.append(int(results[i][1]))
         voted.append(int(results[i][2]))
 
+    print(states,totalpop,voted)
+
     # plot line chart
     trace0 = go.Scatter(
         x = states,
@@ -87,6 +89,41 @@ def countrylinechart():
         line = dict(
             color = ('rgb(22, 96, 167)'),
             width = 4)
+    )
+    data = [trace0,trace1]
+    output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
+    return output
+
+@app.route('/countrybarchart')
+def countrybarchart():
+    # construct query
+    q = "select StateName, TotalPop, Voted from StateVotingClean limit 10"
+    # execute and get results
+    cursor = mysql.connect().cursor()
+    cursor.execute(q)
+    results = cursor.fetchall()
+    # prepare the data to plot
+    states = []
+    totalpop = []
+    voted = []
+    for i in range(len(results)):
+        states.append(results[i][0])
+        totalpop.append(int(results[i][1]))
+        voted.append(int(results[i][2]))
+
+    print("printing states")
+    print(states)
+
+    # plot bar chart
+    trace0 = go.Bar(
+        x = states,
+        y = totalpop,
+        name = 'Total population',
+    )
+    trace1 = go.Bar(
+        x = states,
+        y = voted,
+        name = 'Voted',
     )
     data = [trace0,trace1]
     output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
