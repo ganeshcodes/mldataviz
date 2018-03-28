@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, json
 from flaskext.mysql import MySQL
+import plotly
+plotly.tools.set_credentials_file(username='ganeshcodes', api_key='9QIJefjnbz6Y0arQD7ww')
 import plotly.plotly as py
 import plotly.graph_objs as go
-plotly.tools.set_credentials_file(username='ganeshcodes', api_key='9QIJefjnbz6Y0arQD7ww')
 
 app = Flask(__name__)
 
