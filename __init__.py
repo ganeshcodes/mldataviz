@@ -48,7 +48,7 @@ def piechartdemo():
     labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
     values = [4500,2500,1053,500]
     trace = go.Pie(labels=labels, values=values)
-    py.iplot([trace], filename='piechartdemo')
+    py.iplot([trace], filename='piechartdemo.png')
     return render_template('piechartdemo.html')
 
 if __name__ == '__main__':
