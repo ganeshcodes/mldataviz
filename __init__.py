@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, json
 from flaskext.mysql import MySQL
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 app = Flask(__name__)
 
@@ -38,6 +40,14 @@ def satavgpiechart():
 
     print(resp);
     return json.dumps({'status':'OK','data':resp});
+
+@app.route('/piechartdemo')
+def piechartdemo():
+    labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
+    values = [4500,2500,1053,500]
+    trace = go.Pie(labels=labels, values=values)
+    py.iplot([trace], filename='piechartdemo')
+    return render_template('piechartdemo.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000)
