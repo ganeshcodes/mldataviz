@@ -141,12 +141,10 @@ def countrybarchart():
 @app.route('/kmeansdemo')
 def kmeansdemo():
     df = pd.read_csv('http://ec2-18-232-84-93.compute-1.amazonaws.com:5000/Students.csv',sep=';')
+    print("read csv")
+    print(df)
     #Make a copy of DF
     df_tr = df
-
-    #Transsform the timeOfDay to dummies
-    df_tr = pd.get_dummies(df_tr, columns=['timeOfDay'])
-
     #Standardize
     clmns = ["GivenName","Surname","StreetAddress","City","State","StateFull","ZipCode","EmailAddress","Username","Password","TelephoneNumber","MothersMaiden","Birthday","Age","CCNumber","CVV2","NationalID","BloodType","Kilograms","Centimeters","Latitude","Longitude"]
     df_tr_std = stats.zscore(df_tr[clmns])
@@ -174,7 +172,7 @@ def kmeansdemo():
     plt.xlabel('Wattage')
     plt.ylabel('Duration')'''
 
-    snsplot.savefig("output.png")
+    snsplot.savefig("static/output.png")
     return "kmeans plot generated!"
 
 
