@@ -57,28 +57,38 @@ def satavgpiechart():
 @app.route('/countrylinechart')
 def countrylinechart():
     # construct query
-    q = "select count(*) as count,CountryCode from Starbucks group by CountryCode limit 10"
+    q = "select StateName, TotalPop, Voted from StateVotingClean limit 10"
     # execute and get results
     cursor = mysql.connect().cursor()
     cursor.execute(q)
     results = cursor.fetchall()
     # prepare the data to plot
-    countrycode = []
-    count = []
+    states = []
+    totalpop = []
+    voted = []
     for i in range(len(results)):
-        countrycode.append(results[i][1])
-        values.append(int(results[i][0]))
+        countrycode.append(results[i][0])
+        totalpop.append(int(results[i][1]))
+        voted.append(int(results[i][2]))
 
     # plot line chart
     trace0 = go.Scatter(
-        x = countrycode,
-        y = count,
-        name = 'Number of stores',
+        x = states,
+        y = totalpop,
+        name = 'Total population',
         line = dict(
             color = ('rgb(205, 12, 24)'),
             width = 4)
     )
-    data = [trace0]
+    trace1 = go.Scatter(
+        x = states,
+        y = voted,
+        name = 'Voted',
+        line = dict(
+            color = ('rgb(22, 96, 167)'),
+            width = 4)
+    )
+    data = [trace0,trace1]
     output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
     return output
 
