@@ -20,11 +20,11 @@ def hello_name(user):
     return render_template('hello.html', name = user)
 
 @app.route('/satavgpieform')
-def satavgpieform(user):
+def satavgpieform():
     return render_template('satavgpieform.html')
 
 @app.route('/satavgpiechart', methods=['POST'])
-def satavgpiechart(user):
+def satavgpiechart():
     s =  request.form['start'];
     e = request.form['end'];
     q = "select avg(sat_avg) as average,state from Education where unitid between "+s+" and "+e+" group by state limit 10";
