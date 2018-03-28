@@ -55,7 +55,10 @@ def listcourses():
     cursor = mysql.connect().cursor()
     cursor.execute(q)
     results = cursor.fetchall()
-    print(results)
+    resp = []
+    for i in range(len(results)):
+        resp.append(results[i][0])
+    print(resp)
     return "success"
 
 @app.route('/satavgpiechart', methods=['POST'])
