@@ -7,6 +7,13 @@ from plotly.offline import plot
 import plotly.graph_objs as go
 #py.sign_in('ganeshcodes', '9QIJefjnbz6Y0arQD7ww')
 
+#kmeans imports
+import pandas as pd
+from scipy import stats
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 app = Flask(__name__)
 
 mysql = MySQL()
@@ -128,6 +135,47 @@ def countrybarchart():
     data = [trace0,trace1]
     output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
     return output
+
+@app.route('/kmeansdemo')
+def kmeansdemo():
+    df = pd.read_csv('csv/Students.csv',sep=';')
+    #Make a copy of DF
+    df_tr = df
+
+    #Transsform the timeOfDay to dummies
+    df_tr = pd.get_dummies(df_tr, columns=['timeOfDay'])
+
+    #Standardize
+    clmns = ["GivenName","Surname","StreetAddress","City","State","StateFull","ZipCode","EmailAddress","Username","Password","TelephoneNumber","MothersMaiden","Birthday","Age","CCNumber","CVV2","NationalID","BloodType","Kilograms","Centimeters","Latitude","Longitude"]
+    df_tr_std = stats.zscore(df_tr[clmns])
+
+    #Cluster the data
+    kmeans = KMeans(n_clusters=2, random_state=0).fit(df_tr_std)
+    labels = kmeans.labels_
+
+    #Glue back to originaal data
+    df_tr['clusters'] = labels
+
+    #Add the column into our list
+    clmns.extend(['clusters'])
+
+    #Lets analyze the clusters
+    print(df_tr[clmns].groupby(['clusters']).mean())
+
+    snsplot = sns.lmplot('Kilograms', 'Centimeters', 
+           data=df_tr, 
+           fit_reg=False, 
+           hue="clusters",  
+           scatter_kws={"marker": "D", 
+                        "s": 100})
+    '''plt.title('Clusters Wattage vs Duration')
+    plt.xlabel('Wattage')
+    plt.ylabel('Duration')'''
+
+    snsplot.savefig("output.png")
+    return "kmeans plot generated!"
+
+
 
 @app.route('/piechartdemo')
 def piechartdemo():
