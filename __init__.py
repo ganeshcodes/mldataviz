@@ -35,7 +35,7 @@ def satavgpiechart():
     s =  request.form['start']
     e = request.form['end']
     # construct query
-    q = "select avg(sat_avg) as average,state from Education where unitid between "+s+" and "+e+" group by state limit 10";
+    q = "select avg(sat_avg) as average,state from Education where unitid between "+s+" and "+e+" group by state limit 10"
     # execute and get results
     cursor = mysql.connect().cursor()
     cursor.execute(q)
@@ -53,6 +53,34 @@ def satavgpiechart():
     output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
     return output
     #return json.dumps({'status':'OK','data':resp})
+
+@app.route('/countrylinechart')
+def countrylinechart():
+    # construct query
+    q = "select count(*) as count,CountryCode from Starbucks group by CountryCode limit 10"
+    # execute and get results
+    cursor = mysql.connect().cursor()
+    cursor.execute(q)
+    results = cursor.fetchall()
+    # prepare the data to plot
+    countrycode = []
+    count = []
+    for i in range(len(results)):
+        countrycode.append(results[i][1])
+        values.append(int(results[i][0]))
+
+    # plot line chart
+    trace0 = go.Scatter(
+        x = countrycode,
+        y = count,
+        name = 'Number of stores',
+        line = dict(
+            color = ('rgb(205, 12, 24)'),
+            width = 4)
+    )
+    data = [trace0]
+    output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
+    return output
 
 @app.route('/piechartdemo')
 def piechartdemo():
