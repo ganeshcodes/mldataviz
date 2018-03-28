@@ -176,7 +176,7 @@ def kmeansdemo():
 
     pl.savefig('static/kmeans.png')
 
-    return "kmeans plot generated!"
+    return redirect('/kmeans.png')
 
 
 @app.route('/piechartdemo')
