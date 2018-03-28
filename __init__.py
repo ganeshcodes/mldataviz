@@ -43,7 +43,7 @@ def satavgpieform():
 
 @app.route('/listcoursesform')
 def listcoursesform():
-    return render_template('listcourses.html')
+    return render_template('listcourses.html', data=[])
 
 @app.route('/listcourses', methods=['POST'])
 def listcourses():
@@ -59,7 +59,7 @@ def listcourses():
     for i in range(len(results)):
         resp.append(results[i][0])
     print(resp)
-    return "success"
+    return render_template('listcourses.html', data=resp)
 
 @app.route('/satavgpiechart', methods=['POST'])
 def satavgpiechart():

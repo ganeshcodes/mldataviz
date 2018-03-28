@@ -8,5 +8,12 @@
         <button type="submit" class="submitbtn"/>
       </form>
       
+      <div>
+        <ul>
+            {% for item in data %}
+            <li>{{item}}</li>
+            {% endfor %}
+        </ul>
+      </div>
    </body>
 </html>
