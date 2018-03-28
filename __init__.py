@@ -40,6 +40,20 @@ def hello_name(user):
 def satavgpieform():
     return render_template('satavgpieform.html')
 
+
+@app.route('/listcourses', methods=['POST'])
+def listcourses():
+    # Get inputs from form
+    room =  request.form['room']
+    q = "select distinct Course from classes where Room like '%"+room+"%'"
+    print(q)
+    # execute and get results
+    cursor = mysql.connect().cursor()
+    cursor.execute(q)
+    results = cursor.fetchall()
+    print(results)
+    return "success"
+
 @app.route('/satavgpiechart', methods=['POST'])
 def satavgpiechart():
     # Get inputs from form
@@ -143,7 +157,6 @@ def countrybarchart():
 @app.route('/kmeansdemo')
 def kmeansdemo():
     df = pd.read_csv('static/Students.csv',sep=',')
-
     
     Y = df[['Kilograms']]
 
