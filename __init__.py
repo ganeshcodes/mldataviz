@@ -31,6 +31,7 @@ def satavgpiechart():
     cursor = mysql.connect().cursor()
     cursor.execute(q);
     results = cursor.fetchall();
+    print(results);
     return json.dumps({'status':'OK','data':results});
 
 if __name__ == '__main__':
