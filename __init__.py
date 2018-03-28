@@ -142,9 +142,9 @@ def countrybarchart():
 
 @app.route('/kmeansdemo')
 def kmeansdemo():
-    df = pd.read_csv('static/Students.csv',sep=';')
+    df = pd.read_csv('static/Students.csv',sep=',')
 
-
+    
     Y = df[['Kilograms']]
 
     X = df[['Centimeters']]
