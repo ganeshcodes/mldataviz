@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, json
+from flask import Flask, render_template, request, json, url_for
 from flaskext.mysql import MySQL
 import plotly
 #plotly.tools.set_credentials_file(username='ganeshcodes', api_key='9QIJefjnbz6Y0arQD7ww')
@@ -140,7 +140,11 @@ def countrybarchart():
 
 @app.route('/kmeansdemo')
 def kmeansdemo():
-    df = pd.read_csv('http://ec2-18-232-84-93.compute-1.amazonaws.com:5000/Students.csv',sep=';')
+    a = url_for('static', filename='Students.csv')
+    print("url")
+    print(a)
+
+    df = pd.read_csv(a,sep=';')
     print("read csv")
     print(df)
     #Make a copy of DF
