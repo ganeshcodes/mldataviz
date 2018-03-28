@@ -41,6 +41,10 @@ def satavgpieform():
     return render_template('satavgpieform.html')
 
 
+@app.route('/listcoursesform')
+def listcoursesform():
+    return render_template('listcourses.html')
+
 @app.route('/listcourses', methods=['POST'])
 def listcourses():
     # Get inputs from form
