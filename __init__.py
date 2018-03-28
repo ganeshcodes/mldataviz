@@ -158,60 +158,25 @@ def kmeansdemo():
 
     pca_c = pca.transform(X)
     
-    kmeans=KMeans(n_clusters=3)
+    kmeans=KMeans(n_clusters=2)
 
     kmeansoutput=kmeans.fit(Y)
 
     kmeansoutput
 
-    pl.figure('3 Cluster K-Means')
+    pl.figure('2 Cluster K-Means')
 
     pl.scatter(pca_c[:, 0], pca_d[:, 0], c=kmeansoutput.labels_)
 
-    pl.xlabel('Dividend Yield')
+    pl.xlabel('Centimeteres')
 
-    pl.ylabel('Returns')
+    pl.ylabel('Kilograms')
 
     pl.title('3 Cluster K-Means')
 
     pl.savefig('static/kmeans.png')
 
     return "kmeans plot generated!"
-
-
-@app.route('/kmeansdemo2')
-def kmeansdemo2():
-    df = pd.read_csv('static/Students.csv',sep=',')
-
-    #Make a copy of DF
-    df_tr = df
-    #Standardize
-    #clmns = ["GivenName","Surname","StreetAddress","City","State","StateFull","ZipCode","EmailAddress","Username","Password","TelephoneNumber","MothersMaiden","Birthday","Age","CCNumber","CVV2","NationalID","BloodType","Kilograms","Centimeters","Latitude","Longitude"]
-    #df_tr_std = stats.zscore(df_tr[clmns])
-
-    #Cluster the data
-    kmeans = KMeans(n_clusters=2, random_state=0).fit(df_tr)
-    labels = kmeans.labels_
-
-    #Glue back to originaal data
-    df_tr['clusters'] = labels
-
-    #Add the column into our list
-    clmns.extend(['clusters'])
-
-    #Lets analyze the clusters
-    print(df_tr[clmns].groupby(['clusters']).mean())
-
-    snsplot = sns.lmplot('Kilograms', 'Centimeters', 
-           data=df_tr, 
-           fit_reg=False, 
-           hue="clusters",  
-           scatter_kws={"marker": "D", 
-                        "s": 100})
-    
-    snsplot.savefig("static/output.png")
-    return "kmeans plot generated!"
-
 
 
 @app.route('/piechartdemo')
