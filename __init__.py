@@ -16,7 +16,7 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -29,6 +29,10 @@ mysql.init_app(app)
 @app.route('/index')
 def index():
     return "Hello, World!"
+
+@app.route('/studentscsv')
+def studentscsv():
+    return app.send_static_file('csv/Students.csv')
 
 @app.route('/hello/<user>')
 def hello_name(user):
@@ -140,7 +144,7 @@ def countrybarchart():
 
 @app.route('/kmeansdemo')
 def kmeansdemo():
-    df = pd.read_csv('/home/centos/environments/app/csv/Students.csv',sep=';')
+    df = pd.read_csv('/studentscsv',sep=';')
     #Make a copy of DF
     df_tr = df
 
