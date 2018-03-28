@@ -28,11 +28,11 @@ mysql.init_app(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    return app.send_static_file('csv/Students.csv')
+    return "Hello, World!"
 
 @app.route('/studentscsv')
 def studentscsv():
-    return app.send_static_file('csv/Students.csv')
+    return url_for('static', filename='Students.csv')
 
 @app.route('/hello/<user>')
 def hello_name(user):
@@ -144,7 +144,7 @@ def countrybarchart():
 
 @app.route('/kmeansdemo')
 def kmeansdemo():
-    df = pd.read_csv('/studentscsv',sep=';')
+    df = pd.read_csv('',sep=';')
     #Make a copy of DF
     df_tr = df
 
