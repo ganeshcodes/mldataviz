@@ -2,10 +2,10 @@ from flask import Flask, render_template, request, json
 from flaskext.mysql import MySQL
 import plotly
 #plotly.tools.set_credentials_file(username='ganeshcodes', api_key='9QIJefjnbz6Y0arQD7ww')
-import plotly.plotly as py
+#import plotly.plotly as py
 from plotly.offline import plot
 import plotly.graph_objs as go
-py.sign_in('ganeshcodes', '9QIJefjnbz6Y0arQD7ww')
+#py.sign_in('ganeshcodes', '9QIJefjnbz6Y0arQD7ww')
 
 app = Flask(__name__)
 
@@ -50,17 +50,14 @@ def piechartdemo():
     labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
     values = [4500,2500,1053,500]
 
-    output = plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], output_type='div')
+    #output = plot([go.Scatter(x=[1, 2, 3], y=[3, 2, 6])], output_type='div')
 
-    return output    
-    '''trace = go.Pie(labels=labels, values=values)
+    trace = go.Pie(labels=labels, values=values)
     data = [trace]
-    layout = go.Layout(title='Pie chart demo', width=800, height=640)
-    fig = go.Figure(data=data, layout=layout)
+    output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
+    return output
 
-    py.image.save_as(fig, filename='piechartdemo.png')'''
-
-
+    #layout = go.Layout(title='Pie chart demo', width=800, height=640)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000)
