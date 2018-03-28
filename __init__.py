@@ -48,8 +48,11 @@ def piechartdemo():
     labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
     values = [4500,2500,1053,500]
     trace = go.Pie(labels=labels, values=values)
-    py.iplot([trace], filename='piechartdemo.png')
-    return render_template('piechartdemo.html')
+    data = [trace]
+    layout = go.Layout(title='Pie chart demo', width=800, height=640)
+    fig = go.Figure(data=data, layout=layout)
+
+    py.image.save_as(fig, filename='piechartdemo.png')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000)
