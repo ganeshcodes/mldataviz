@@ -176,15 +176,21 @@ def kmeansdemo():
 
     pl.savefig('static/kmeans.png')
 
+    return "kmeans plot generated!"
 
-    '''#Make a copy of DF
+
+@app.route('/kmeansdemo2')
+def kmeansdemo2():
+    df = pd.read_csv('static/Students.csv',sep=',')
+
+    #Make a copy of DF
     df_tr = df
     #Standardize
-    #clmns = ["GivenName","Surname","StreetAddress","City","State","StateFull","ZipCode","EmailAddress","Username","Password","TelephoneNumber","MothersMaiden","Birthday","Age","CCNumber","CVV2","NationalID","BloodType","Kilograms","Centimeters","Latitude","Longitude"]
-    #df_tr_std = stats.zscore(df_tr[clmns])
+    clmns = ["GivenName","Surname","StreetAddress","City","State","StateFull","ZipCode","EmailAddress","Username","Password","TelephoneNumber","MothersMaiden","Birthday","Age","CCNumber","CVV2","NationalID","BloodType","Kilograms","Centimeters","Latitude","Longitude"]
+    df_tr_std = stats.zscore(df_tr[clmns])
 
     #Cluster the data
-    kmeans = KMeans(n_clusters=2, random_state=0).fit(Y)
+    kmeans = KMeans(n_clusters=2, random_state=0).fit(df_tr_std)
     labels = kmeans.labels_
 
     #Glue back to originaal data
@@ -203,7 +209,7 @@ def kmeansdemo():
            scatter_kws={"marker": "D", 
                         "s": 100})
     
-    snsplot.savefig("static/output.png")'''
+    snsplot.savefig("static/output.png")
     return "kmeans plot generated!"
 
 
