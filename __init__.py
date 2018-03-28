@@ -140,11 +140,7 @@ def countrybarchart():
 
 @app.route('/kmeansdemo')
 def kmeansdemo():
-    a = url_for('static', filename='Students.csv')
-    print("url")
-    print(a)
-
-    df = pd.read_csv(a,sep=';')
+    df = pd.read_csv('static/Students.csv',sep=';')
     print("read csv")
     print(df)
     #Make a copy of DF
