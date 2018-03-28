@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, json
 from flaskext.mysql import MySQL
 import plotly.plotly as py
 import plotly.graph_objs as go
+plotly.tools.set_credentials_file(username='ganeshcodes', api_key='9QIJefjnbz6Y0arQD7ww')
 
 app = Flask(__name__)
 
@@ -36,7 +37,7 @@ def satavgpiechart():
     resp = [['State', 'Average']]
     for i in range(len(results)):
         if results[i][0]:
-            resp.append(results[i][1], float(results[i][0]))
+            resp.append([results[i][1], float(results[i][0])])
 
     print(resp);
     return json.dumps({'status':'OK','data':resp});
