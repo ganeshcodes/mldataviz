@@ -28,7 +28,7 @@ mysql.init_app(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Hello, World!"
+    return app.send_static_file('csv/Students.csv')
 
 @app.route('/studentscsv')
 def studentscsv():
