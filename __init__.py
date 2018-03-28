@@ -67,7 +67,7 @@ def countrylinechart():
     totalpop = []
     voted = []
     for i in range(len(results)):
-        countrycode.append(results[i][0])
+        states.append(results[i][0])
         totalpop.append(int(results[i][1]))
         voted.append(int(results[i][2]))
 
