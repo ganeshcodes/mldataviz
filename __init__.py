@@ -31,19 +31,28 @@ def satavgpieform():
 
 @app.route('/satavgpiechart', methods=['POST'])
 def satavgpiechart():
-    s =  request.form['start'];
-    e = request.form['end'];
+    # Get inputs from form
+    s =  request.form['start']
+    e = request.form['end']
+    # construct query
     q = "select avg(sat_avg) as average,state from Education where unitid between "+s+" and "+e+" group by state limit 10";
+    # execute and get results
     cursor = mysql.connect().cursor()
-    cursor.execute(q);
-    results = cursor.fetchall();
-    resp = [['State', 'Average']]
+    cursor.execute(q)
+    results = cursor.fetchall()
+    # prepare the data to plot
+    labels = []
+    values = []
     for i in range(len(results)):
         if results[i][0]:
-            resp.append([results[i][1], float(results[i][0])])
-
-    print(resp);
-    return json.dumps({'status':'OK','data':resp});
+            labels.append(results[i][1])
+            values.append(int(results[i][0]))
+    # plot pie chart
+    trace = go.Pie(labels=labels, values=values)
+    data = [trace]
+    output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
+    return output
+    #return json.dumps({'status':'OK','data':resp})
 
 @app.route('/piechartdemo')
 def piechartdemo():
