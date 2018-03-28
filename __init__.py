@@ -11,6 +11,8 @@ import plotly.graph_objs as go
 import pandas as pd
 from scipy import stats
 from sklearn.cluster import KMeans
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 
