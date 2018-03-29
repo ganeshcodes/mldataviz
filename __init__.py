@@ -273,8 +273,15 @@ def kmeansdemo():
 
     return redirect('/kmeans.png')
 
-@app.route('/cluster')
+@app.route('/clusterform')
+def clusterform():
+    return render_template('clusterform.html')
+
+@app.route('/cluster',methods=['POST'])
 def clusterdemo():
+    N =  int(request.form['clusters'])
+    print('N=')
+    print(N)
     df = pd.read_csv('static/CSEFall2018.csv',sep=',',usecols=['Course Number','Max Enroll'])
     
     X = df[['Course Number']]
@@ -291,7 +298,7 @@ def clusterdemo():
 
     pca_c = pca.transform(X)
     
-    kmeans=KMeans(n_clusters=4)
+    kmeans=KMeans(n_clusters=N)
 
     kmeansoutput=kmeans.fit(Y)
 
