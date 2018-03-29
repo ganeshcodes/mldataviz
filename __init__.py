@@ -67,9 +67,9 @@ def enrollform():
     else:
         q2 = "update csefall set studentname='"+name+"' where course="+course+" and section="+section
         cursor = mysql.connect().cursor()
-        cursor.execute(q)
+        cursor.execute(q2)
         return "student successfully enrolled"
-        
+
     return render_template('enrollform.html', data=[])
 
 @app.route('/listcourses', methods=['POST'])
