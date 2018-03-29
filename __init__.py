@@ -302,6 +302,8 @@ def clusterdemo():
 
     kmeansoutput=kmeans.fit(Y)
 
+    print(kmeans)
+
     pl.figure('2 Cluster K-Means')
 
     pl.scatter(pca_c[:, 0], pca_d[:, 0], c=kmeansoutput.labels_)
