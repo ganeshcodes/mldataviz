@@ -178,18 +178,24 @@ def coursebarchart():
     results = cursor.fetchall()
     count = []
     count.append(results[0][0])
+    print('count1 = ')
+    print(count)
 
     cursor = mysql.connect().cursor()
     cursor.execute(q2)
     results = cursor.fetchall()
     count = []
     count.append(results[0][0])
+     print('count2 = ')
+    print(count)
 
     cursor = mysql.connect().cursor()
     cursor.execute(q3)
     results = cursor.fetchall()
     count = []
     count.append(results[0][0])
+     print('count3 = ')
+    print(count)
 
     cursor = mysql.connect().cursor()
     cursor.execute(q4)
