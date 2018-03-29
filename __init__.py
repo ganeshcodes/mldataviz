@@ -303,6 +303,11 @@ def clusterdemo():
     kmeansoutput=kmeans.fit(Y)
 
     print(kmeans.cluster_centers_)
+    centers = []
+    for i in range(len(kmeans.cluster_centers_)):
+        centers.append(kmeans.cluster_centers_[i][0])
+
+    print(centers)
 
     pl.figure('2 Cluster K-Means')
 
