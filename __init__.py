@@ -282,7 +282,8 @@ def clusterdemo():
     Y = df[['Max Enroll']]
 
     print("read csv")
-    print(df)
+
+    print(Y)
     
     pca = PCA(n_components=1).fit(Y)
 
