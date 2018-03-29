@@ -62,9 +62,14 @@ def enrollform():
     results = cursor.fetchall()
     print(results)
 
-    '''q2 = "update csefall set studentname='"+name+"' where course="+course+" and section="+section
-    cursor = mysql.connect().cursor()
-    cursor.execute(q)'''
+    if (results[0] == name):
+        return "student already enrolled"
+    else:
+        q2 = "update csefall set studentname='"+name+"' where course="+course+" and section="+section
+        cursor = mysql.connect().cursor()
+        cursor.execute(q)
+        return "student successfully enrolled"
+        
     return render_template('enrollform.html', data=[])
 
 @app.route('/listcourses', methods=['POST'])
