@@ -9,5 +9,18 @@
                 <button type="submit" class="submitbtn" name="submit"/>
             </form>
       </div>
+
+      <div>
+            <table>
+                <tr>
+                    <th>Centroids</th>
+                </tr>
+                {% for item in data %}
+                <tr>
+                    <td>{{item}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+          </div>
    </body>
 </html>

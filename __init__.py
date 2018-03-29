@@ -275,7 +275,7 @@ def kmeansdemo():
 
 @app.route('/clusterform')
 def clusterform():
-    return render_template('clusterform.html')
+    return render_template('clusterform.html', data=[])
 
 @app.route('/cluster',methods=['POST'])
 def clusterdemo():
@@ -321,8 +321,7 @@ def clusterdemo():
 
     pl.savefig('static/kmeans.png')
 
-    return redirect('/kmeans.png')
-
+    return render_template('clusterform.html', data=centers)
 
 @app.route('/piechartdemo')
 def piechartdemo():
