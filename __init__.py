@@ -45,6 +45,28 @@ def satavgpieform():
 def listcoursesform():
     return render_template('listcourses.html', data=[])
 
+
+@app.route('/enrollform')
+def enroll():
+    return render_template('enrollform.html', data=[])
+
+
+@app.route('/enrollform', methods=['POST'])
+def enrollform():
+    course = request.form['course']
+    section = request.form['section']
+    name = request.form['name']
+    q1 = "select studentname from csefall where course="+course+" and section="+section
+    cursor = mysql.connect().cursor()
+    cursor.execute(q)
+    results = cursor.fetchall()
+    print(results)
+
+    '''q2 = "update csefall set studentname='"+name+"' where course="+course+" and section="+section
+    cursor = mysql.connect().cursor()
+    cursor.execute(q)'''
+    return render_template('enrollform.html', data=[])
+
 @app.route('/listcourses', methods=['POST'])
 def listcourses():
     # Get inputs from form
