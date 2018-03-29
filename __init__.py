@@ -275,7 +275,7 @@ def kmeansdemo():
 
 @app.route('/cluster')
 def clusterdemo():
-    df = pd.read_csv('static/CSEFall2018.csv',sep=',')
+    df = pd.read_csv('static/CSEFall2018.csv',sep=',',usecols=[2,13])
     
     X = df[['Course Number']]
 
