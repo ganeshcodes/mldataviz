@@ -161,6 +161,79 @@ def countrybarchart():
     output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
     return output
 
+@app.route('/coursebarchart')
+def coursebarchart():
+    # construct query
+    q1 = "select count(course) from csefall where course>1000 and course <2000"
+    q2 = "select count(course) from csefall where course>2000 and course <3000"
+    q3 = "select count(course) from csefall where course>3000 and course <4000"
+    q4 = "select count(course) from csefall where course>4000 and course <5000"
+    q5 = "select count(course) from csefall where course>5000 and course <6000"
+    q6 = "select count(course) from csefall where course>6000 and course <7000"
+    q7 = "select count(course) from csefall where course>7000 and course <8000"
+
+    # execute and get results
+    cursor = mysql.connect().cursor()
+    cursor.execute(q1)
+    results = cursor.fetchall()
+    count = []
+    count.append(results[0][0])
+
+    cursor = mysql.connect().cursor()
+    cursor.execute(q2)
+    results = cursor.fetchall()
+    count = []
+    count.append(results[0][0])
+
+    cursor = mysql.connect().cursor()
+    cursor.execute(q3)
+    results = cursor.fetchall()
+    count = []
+    count.append(results[0][0])
+
+    cursor = mysql.connect().cursor()
+    cursor.execute(q4)
+    results = cursor.fetchall()
+    count = []
+    count.append(results[0][0])
+
+    cursor = mysql.connect().cursor()
+    cursor.execute(q5)
+    results = cursor.fetchall()
+    count = []
+    count.append(results[0][0])
+
+    cursor = mysql.connect().cursor()
+    cursor.execute(q6)
+    results = cursor.fetchall()
+    count = []
+    count.append(results[0][0])
+
+    cursor = mysql.connect().cursor()
+    cursor.execute(q7)
+    results = cursor.fetchall()
+    count = []
+    count.append(results[0][0])
+
+    print("counts = ")
+    print(count)
+
+    # prepare the data to plot
+    courses = ['1K','2K','3K','4K','5K','6k','7k','8k']
+
+    print("printing courses")
+    print(courses)
+
+    # plot bar chart
+    trace0 = go.Bar(
+        x = courses,
+        y = count,
+        name = 'Total population',
+    )
+    data = [trace0]
+    output = plot(data,output_type='div',show_link=False, image_height=600, image_width=600)
+    return output
+
 @app.route('/kmeansdemo')
 def kmeansdemo():
     df = pd.read_csv('static/Students.csv',sep=',')
