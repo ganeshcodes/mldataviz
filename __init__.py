@@ -58,7 +58,7 @@ def enrollform():
     name = request.form['name']
     q1 = "select studentname from csefall where course="+course+" and section="+section
     cursor = mysql.connect().cursor()
-    cursor.execute(q)
+    cursor.execute(q1)
     results = cursor.fetchall()
     print(results)
 
