@@ -62,7 +62,7 @@ def enrollform():
     results = cursor.fetchall()
     print(results)
 
-    if (results[0] == name):
+    if (results[0][0] == name):
         return "student already enrolled"
     else:
         q2 = "update csefall set studentname='"+name+"' where course="+course+" and section="+section
