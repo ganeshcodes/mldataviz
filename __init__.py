@@ -164,7 +164,7 @@ def countrybarchart():
 @app.route('/coursebarchart')
 def coursebarchart():
     print('reached')
-    
+
     # construct query
     q1 = "select count(course) from csefall where course>1000 and course <2000"
     q2 = "select count(course) from csefall where course>2000 and course <3000"
@@ -266,6 +266,41 @@ def kmeansdemo():
     pl.xlabel('Centimeteres')
 
     pl.ylabel('Kilograms')
+
+    pl.title('3 Cluster K-Means')
+
+    pl.savefig('static/kmeans.png')
+
+    return redirect('/kmeans.png')
+
+@app.route('/cluster')
+def clusterdemo():
+    df = pd.read_csv('static/CSEFall2018.csv',sep=',')
+    
+    X = df[['Course Number']]
+
+    Y = df[['Max Enroll']]
+
+    print("read csv")
+    print(df)
+    
+    pca = PCA(n_components=1).fit(Y)
+
+    pca_d = pca.transform(Y)
+
+    pca_c = pca.transform(X)
+    
+    kmeans=KMeans(n_clusters=4)
+
+    kmeansoutput=kmeans.fit(Y)
+
+    pl.figure('2 Cluster K-Means')
+
+    pl.scatter(pca_c[:, 0], pca_d[:, 0], c=kmeansoutput.labels_)
+
+    pl.xlabel('Course Number')
+
+    pl.ylabel('Max Enroll')
 
     pl.title('3 Cluster K-Means')
 
