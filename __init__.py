@@ -163,6 +163,8 @@ def countrybarchart():
 
 @app.route('/coursebarchart')
 def coursebarchart():
+    print('reached')
+    
     # construct query
     q1 = "select count(course) from csefall where course>1000 and course <2000"
     q2 = "select count(course) from csefall where course>2000 and course <3000"
